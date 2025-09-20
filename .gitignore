@@ -38,7 +38,8 @@ yarn-error.log*
 
 # vercel
 .vercel
-
+.gitignore
+.gitattributes
 # typescript
 *.tsbuildinfo
 next-env.d.ts
