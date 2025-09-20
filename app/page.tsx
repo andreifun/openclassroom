@@ -1,3 +1,10 @@
 export default function Home() {
-  return null;
+  return (
+      <SidebarProvider>
+          <div>
+              <h1>Hello World</h1>
+          </div>
+      </SidebarProvider>
+      )
+    
 }
