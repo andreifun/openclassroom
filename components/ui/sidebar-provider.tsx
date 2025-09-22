@@ -12,6 +12,8 @@ import { Compass, LayoutDashboard, Settings } from 'lucide-react';
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {Input} from "@/components/ui/input";
 import {ModeToggle} from "@/components/modetoggle";
+import Logo from "@/components/ui/logo";
+import { school } from "@/app/config.json"
 
 // Typed link definition for sidebar items
 export type NavLink = {
@@ -87,11 +89,8 @@ export function SidebarProvider({
   return (
     <div className={cn('flex flex-col h-screen overflow-hidden bg-secondary')}>
       <div className="flex flex-row justify-between p-4 items-center">
-        <div>
-          <Image src={'/logo.svg'} alt={'Logo'} width={180} height={100} className={'dark:hidden block'} />
-          <Image src={'/logo-dark.svg'} alt={'Logo'} width={180} height={100} className={'dark:block hidden'} />
-        </div>
-
+        <Logo/>
+        <h1>{school.name}</h1>
         <div className="flex items-center gap-2">
             <ModeToggle/>
           <SignedOut>
@@ -116,7 +115,7 @@ export function SidebarProvider({
                               <div
                                 className={cn(
                                   "p-2 hover:rounded-md  rounded-2xl flex items-center justify-center",
-                                  isActive ? "bg-green-300" : "bg-foreground/10"
+                                  isActive ? "bg-primary" : "bg-foreground/10"
                                 )}
                               >
                                 <Icon className={cn("h-4 w-4",

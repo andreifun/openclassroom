@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/themesprovider"
 import {SidebarProvider} from "@/components/ui/sidebar-provider";
 import {ClerkProvider} from "@clerk/nextjs";
+import { I18nProvider } from "@/lib/i18n";
 
 
 // Use Outfit as the default sans-serif font and expose it via a dedicated CSS variable
@@ -38,14 +39,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <html lang="en" suppressHydrationWarning className={`${outfitSans.variable} ${geistMono.variable}`}>
                 <head/>
                 <body className="font-sans">
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    {children}
-                </ThemeProvider>
+                <I18nProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {children}
+                    </ThemeProvider>
+                </I18nProvider>
                 </body>
                 </html>
             </ClerkProvider>

@@ -22,6 +22,7 @@ import { ScrollAreaViewport } from "@radix-ui/react-scroll-area";
 import { cn } from "@/lib/utils";
 import {useTheme} from "next-themes";
 import {Button} from "@/components/ui/button";
+import { useTranslation } from "@/lib/i18n";
 
 
 // Set worker source immediately when module loads
@@ -43,6 +44,8 @@ type ToolProps = {
 };
 
 function Tool({ name, description, icon, canvas }: ToolProps) {
+    const { t } = useTranslation();
+    
     return (
         <div className="bg-background border border-n3 rounded-md overflow-hidden">
             {canvas ? (
@@ -55,8 +58,8 @@ function Tool({ name, description, icon, canvas }: ToolProps) {
                     </div>
                     <p className={"text-md text-primary/80 mb-2"}>{description}</p>
                     <div className={"w-full flex flex-row gap-2 mt-6"}>
-                        <Button className={"w-max"}>Use Tool</Button>
-                        <Button variant={"outline"} className={"w-max"}>Learn More</Button>
+                        <Button className={"w-max"}>{t('reader.useTool')}</Button>
+                        <Button variant={"outline"} className={"w-max"}>{t('reader.learnMore')}</Button>
                     </div>
                 </div>
             )}
@@ -74,11 +77,12 @@ function Tool({ name, description, icon, canvas }: ToolProps) {
 
 
 export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = false, fullscreen = false}: TemoLectorProps) {
+    const { t } = useTranslation();
 
     // Tools Utilities
     const tools = [
-        { id: 1, name: "Tool 1", icon: <Download />, description: "Download the current page as a PDF." },
-        { id: 2, name: "Tool 2", canvas: <div>Canvas for Tool 2</div> },
+        { id: 1, name: t('reader.tool1'), icon: <Download />, description: t('reader.tool1Description') },
+        { id: 2, name: t('reader.tool2'), canvas: <div>Canvas for Tool 2</div> },
     ];
 
     const ToolsPages = {
@@ -107,7 +111,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                            className={"p-2 block dark:hidden"} priority={true}/>
                     <Image src={"/lector-dark.svg"} alt={"Temo Lector"} width={150} height={56}
                            className={"p-2 dark:block hidden"} priority={true}/>
-                    <h1 className={"text-lg mt-0.75"}>Starting up...</h1>
+                    <h1 className={"text-lg mt-0.75"}>{t('reader.startingUp')}</h1>
                 </div>
             }
             source={src}
@@ -141,7 +145,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <PanelLeft size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Pages</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.pages')}</TooltipContent>
                         </Tooltip>
                         <Image src={"/lector.svg"} alt={"Temo Lector"} width={150} height={56}
                                className={"p-2 block dark:hidden"}/>
@@ -160,7 +164,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <CircleFadingPlus size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Add to Continue Reading.</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.addToContinue')}</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger>
@@ -172,7 +176,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <Bookmark size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Save to a Folder.</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.saveToFolder')}</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger>
@@ -185,7 +189,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <SunMoon size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Toggle Theme.</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.toggleTheme')}</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger>
@@ -197,7 +201,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <Maximize size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Fullscreen.</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.fullscreen')}</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger>
@@ -210,7 +214,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                                     <ToolCase size={"16"}/>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent>Tools</TooltipContent>
+                            <TooltipContent>{t('reader.tooltips.tools')}</TooltipContent>
                         </Tooltip>
                     </div>
                 </div>
@@ -228,7 +232,7 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                             <ScrollAreaViewport className={"w-full h-full"}>
                                 <div className={"flex flex row gap-1 items-center"}>
                                     <Files size={"18"}/>
-                                    <h1>Pages</h1>
+                                    <h1>{t('reader.pages')}</h1>
                                 </div>
                                 <div className={"w-full h-[1px] my-2 bg-n3"}/>
                                 <Thumbnails className={"mb-12"}>
@@ -254,11 +258,11 @@ export function TemoLector({ src, showThumbnailsPanel = true , showToolsPanel = 
                     <div className={"border-l p-2 border-n3 bg-n5 h-full w-[50%]"}>
                         <div className={"flex flex row gap-1 items-center"}>
                             <ToolCase size={"18"}/>
-                            <h1>Tools</h1>
+                            <h1>{t('reader.tools')}</h1>
                         </div>
                         <div className={"w-full h-[1px] my-2 bg-n3"}/>
                         {toolsPage != "home" && (
-                            <div className={"flex flex-row items-center mb-2 "} onClick={() => setToolsPage("home")}><ChevronLeft className={"w-8"}/><h3>Go Back</h3></div>
+                            <div className={"flex flex-row items-center mb-2 "} onClick={() => setToolsPage("home")}><ChevronLeft className={"w-8"}/><h3>{t('reader.goBack')}</h3></div>
                         )}
                         {ToolsPages[toolsPage]}
                     </div>
